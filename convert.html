@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Convert Format Angka</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+      }
+
+      .result {
+        margin-top: 15px;
+        background: #e8f5e9;
+        padding: 10px;
+        border-radius: 5px;
+        word-break: break-all;
+      }
+
+      button {
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: #4caf50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #45a049;
+      }
+
+      /* Toast */
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #333;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .toast.show {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Convert Format Angka</h2>
+
+      <textarea id="inputAngka" placeholder="Paste angka di sini..."></textarea>
+
+      <div class="result" id="hasil">-</div>
+
+      <button onclick="copyHasil()">Copy Hasil</button>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+      function convertNumber(value) {
+        value = value.trim();
+
+        if (value.includes(".") && value.includes(",")) {
+          if (value.lastIndexOf(",") > value.lastIndexOf(".")) {
+            value = value.replace(/\./g, "");
+            value = value.replace(",", ".");
+          } else {
+            value = value.replace(/,/g, "");
+          }
+        } else {
+          if (value.includes(",")) {
+            value = value.replace(",", ".");
+          }
+        }
+
+        return value;
+      }
+
+      document.getElementById("inputAngka").addEventListener("input", function () {
+        const hasil = convertNumber(this.value);
+        document.getElementById("hasil").innerText = hasil || "-";
+      });
+
+      function copyHasil() {
+        const text = document.getElementById("hasil").innerText;
+
+        if (text === "-" || text === "") return;
+
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Berhasil di-copy!");
+        });
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
