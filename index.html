@@ -2,134 +2,432 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Convert Format Angka</title>
     <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
       body {
-        font-family: Arial, sans-serif;
-        background: #f4f6f8;
+        font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+        background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 40%, #312e81 70%, #1e3a8a 100%);
       }
 
-      .container {
-        background: white;
-        padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        width: 400px;
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(90px);
+        z-index: 0;
+        pointer-events: none;
       }
 
-      h2 {
+      body::before {
+        width: 420px;
+        height: 420px;
+        top: -120px;
+        left: -100px;
+        background: radial-gradient(circle, rgba(147, 51, 234, 0.55), transparent 70%);
+        animation: float 12s ease-in-out infinite;
+      }
+
+      body::after {
+        width: 460px;
+        height: 460px;
+        bottom: -140px;
+        right: -120px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.5), transparent 70%);
+        animation: float 16s ease-in-out infinite reverse;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(40px, 30px) scale(1.15);
+        }
+      }
+
+      .bg-orb {
+        position: fixed;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        filter: blur(110px);
+        z-index: 0;
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(217, 70, 239, 0.4), transparent 70%);
+        top: 45%;
+        left: 55%;
+        animation: float 20s ease-in-out infinite;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 460px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        padding: 28px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-header {
         text-align: center;
+        margin-bottom: 22px;
+      }
+
+      .card-header h1 {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #a5b4fc, #e879f9, #67e8f9);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      .card-header p {
+        margin-top: 6px;
+        font-size: 13px;
+        color: #a5b4fc;
+      }
+
+      .input-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .input-header label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #c7d2fe;
+      }
+
+      .btn-paste {
+        border: none;
+        padding: 7px 18px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+      }
+
+      .btn-paste:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.45);
+      }
+
+      .btn-paste:active {
+        transform: translateY(0);
       }
 
       textarea {
         width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 16px;
+        min-height: 90px;
+        padding: 12px 14px;
+        border: 1.5px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        font-size: 15px;
+        font-family: inherit;
+        color: #e2e8f0;
+        background: rgba(255, 255, 255, 0.06);
+        resize: vertical;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .result {
-        margin-top: 15px;
-        background: #e8f5e9;
-        padding: 10px;
-        border-radius: 5px;
-        word-break: break-all;
+      textarea::placeholder {
+        color: #64748b;
       }
 
-      button {
-        margin-top: 10px;
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background: #4caf50;
-        color: white;
-        font-size: 16px;
+      textarea:focus {
+        border-color: #818cf8;
+        box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.25);
+      }
+
+      .result-section {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .result-card {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.05);
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .result-card:hover {
+        border-color: rgba(129, 140, 248, 0.5);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .result-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .result-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #667eea;
+      }
+
+      .dot.bulat {
+        background: #f59e0b;
+      }
+
+      .btn-copy {
+        border: 1px solid rgba(129, 140, 248, 0.4);
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #c7d2fe;
+        background: rgba(129, 140, 248, 0.12);
         cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
       }
 
-      button:hover {
-        background: #45a049;
+      .btn-copy:hover {
+        background: #818cf8;
+        border-color: #818cf8;
+        color: #fff;
       }
 
-      /* Toast */
+      .btn-copy.copied {
+        background: #22c55e;
+        color: #fff;
+      }
+
+      .result-value {
+        font-size: 22px;
+        font-weight: 700;
+        font-family: Consolas, Menlo, monospace;
+        color: #f8fafc;
+        word-break: break-all;
+        min-height: 30px;
+      }
+
+      .result-value.empty {
+        color: #475569;
+      }
+
+      .hint {
+        margin-top: 16px;
+        text-align: center;
+        font-size: 12px;
+        color: #64748b;
+      }
+
       .toast {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #333;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 500;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        z-index: 10;
       }
 
       .toast.show {
         opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h2>Convert Format Angka</h2>
+    <div class="card">
+      <div class="bg-orb"></div>
+      <div class="card-header">
+        <h1>Konverter Angka</h1>
+        <p>Tempel angka format apapun, hasil langsung diperbarui</p>
+      </div>
 
-      <textarea id="inputAngka" placeholder="Paste angka di sini..."></textarea>
+      <div class="input-section">
+        <div class="input-header">
+          <label for="inputAngka">Input Angka</label>
+          <button class="btn-paste" id="btnPaste" type="button">Paste</button>
+        </div>
+        <textarea
+          id="inputAngka"
+          placeholder="Paste angka di sini, contoh: 5.000,55"
+          rows="4"
+        ></textarea>
+      </div>
 
-      <div class="result" id="hasil">-</div>
+      <div class="result-section">
+        <div class="result-card">
+          <div class="result-head">
+            <span class="result-label"><span class="dot"></span>2 Angka di Belakang Koma</span>
+            <button class="btn-copy" id="btnCopyDesimal" type="button">Salin</button>
+          </div>
+          <div class="result-value empty" id="hasilDesimal">-</div>
+        </div>
 
-      <button onclick="copyHasil()">Copy Hasil</button>
+        <div class="result-card">
+          <div class="result-head">
+            <span class="result-label"><span class="dot bulat"></span>Dibulatkan</span>
+            <button class="btn-copy" id="btnCopyBulat" type="button">Salin</button>
+          </div>
+          <div class="result-value empty" id="hasilBulat">-</div>
+        </div>
+      </div>
+
+      <p class="hint">Hasil otomatis berubah setiap kamu mengetik atau menempel angka</p>
     </div>
 
     <div id="toast" class="toast"></div>
 
     <script>
-      function convertNumber(value) {
-        value = value.trim();
+      const input = document.getElementById("inputAngka");
+      const hasilDesimal = document.getElementById("hasilDesimal");
+      const hasilBulat = document.getElementById("hasilBulat");
+
+      function parseNumber(raw) {
+        if (!raw) return { num: NaN, sep: "." };
+
+        let value = raw.trim();
+        let sep = ".";
 
         if (value.includes(".") && value.includes(",")) {
           if (value.lastIndexOf(",") > value.lastIndexOf(".")) {
-            value = value.replace(/\./g, "");
-            value = value.replace(",", ".");
+            value = value.replace(/\./g, "").replace(",", ".");
+            sep = ",";
           } else {
             value = value.replace(/,/g, "");
+            sep = ".";
           }
-        } else {
-          if (value.includes(",")) {
-            value = value.replace(",", ".");
-          }
+        } else if (value.includes(",")) {
+          value = value.replace(",", ".");
+          sep = ",";
         }
 
-        return value;
+        return { num: Number(value), sep };
       }
 
-      document.getElementById("inputAngka").addEventListener("input", function () {
-        const hasil = convertNumber(this.value);
-        document.getElementById("hasil").innerText = hasil || "-";
+      function update() {
+        const { num, sep } = parseNumber(input.value);
+
+        if (isNaN(num)) {
+          hasilDesimal.textContent = "-";
+          hasilBulat.textContent = "-";
+          hasilDesimal.classList.add("empty");
+          hasilBulat.classList.add("empty");
+          return;
+        }
+
+        let duaDesimal = num.toFixed(2);
+        if (sep === ",") duaDesimal = duaDesimal.replace(".", ",");
+
+        hasilDesimal.textContent = duaDesimal;
+        hasilBulat.textContent = Math.round(num).toString();
+        hasilDesimal.classList.remove("empty");
+        hasilBulat.classList.remove("empty");
+      }
+
+      input.addEventListener("input", update);
+
+      document.getElementById("btnPaste").addEventListener("click", async function () {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (!text) {
+            showToast("Clipboard kosong");
+            return;
+          }
+          input.value = text;
+          update();
+          showToast("Berhasil di-paste!");
+        } catch (err) {
+          showToast("Gagal mengakses clipboard");
+        }
       });
 
-      function copyHasil() {
-        const text = document.getElementById("hasil").innerText;
-
-        if (text === "-" || text === "") return;
-
-        navigator.clipboard.writeText(text).then(() => {
-          showToast("Berhasil di-copy!");
+      function bindCopy(btnId, el) {
+        const btn = document.getElementById(btnId);
+        btn.addEventListener("click", async function () {
+          const text = el.textContent;
+          if (!text || text === "-") {
+            showToast("Tidak ada hasil untuk disalin");
+            return;
+          }
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.classList.add("copied");
+            btn.textContent = "Tersalin";
+            setTimeout(() => {
+              btn.classList.remove("copied");
+              btn.textContent = "Salin";
+            }, 1500);
+            showToast("Berhasil di-copy!");
+          } catch (err) {
+            showToast("Gagal menyalin");
+          }
         });
       }
 
+      bindCopy("btnCopyDesimal", hasilDesimal);
+      bindCopy("btnCopyBulat", hasilBulat);
+
       function showToast(message) {
         const toast = document.getElementById("toast");
-        toast.innerText = message;
+        toast.textContent = message;
         toast.classList.add("show");
 
-        setTimeout(() => {
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => {
           toast.classList.remove("show");
         }, 2000);
       }
