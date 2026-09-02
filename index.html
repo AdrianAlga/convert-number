@@ -12,273 +12,377 @@
       }
 
       body {
-        font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+        font-family:
+          "Inter",
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px;
-        position: relative;
-        overflow-x: hidden;
-        background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 40%, #312e81 70%, #1e3a8a 100%);
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        border-radius: 50%;
-        filter: blur(90px);
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      body::before {
-        width: 420px;
-        height: 420px;
-        top: -120px;
-        left: -100px;
-        background: radial-gradient(circle, rgba(147, 51, 234, 0.55), transparent 70%);
-        animation: float 12s ease-in-out infinite;
-      }
-
-      body::after {
-        width: 460px;
-        height: 460px;
-        bottom: -140px;
-        right: -120px;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.5), transparent 70%);
-        animation: float 16s ease-in-out infinite reverse;
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translate(0, 0) scale(1);
-        }
-        50% {
-          transform: translate(40px, 30px) scale(1.15);
-        }
-      }
-
-      .bg-orb {
-        position: fixed;
-        width: 320px;
-        height: 320px;
-        border-radius: 50%;
-        filter: blur(110px);
-        z-index: 0;
-        pointer-events: none;
-        background: radial-gradient(circle, rgba(217, 70, 239, 0.4), transparent 70%);
-        top: 45%;
-        left: 55%;
-        animation: float 20s ease-in-out infinite;
+        padding: 24px;
+        background: #0a0a0a;
+        color: #fafafa;
       }
 
       .card {
         width: 100%;
-        max-width: 460px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 20px;
-        padding: 28px;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-        position: relative;
-        z-index: 1;
+        max-width: 440px;
+        background: #141414;
+        border: 1px solid #262626;
+        border-radius: 16px;
+        padding: 32px 28px;
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
       }
 
       .card-header {
-        text-align: center;
-        margin-bottom: 22px;
+        margin-bottom: 28px;
       }
 
       .card-header h1 {
-        font-size: 24px;
-        font-weight: 700;
-        background: linear-gradient(135deg, #a5b4fc, #e879f9, #67e8f9);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
+        font-size: 26px;
+        font-weight: 800;
+        color: #fafafa;
+        letter-spacing: -0.5px;
       }
 
       .card-header p {
         margin-top: 6px;
         font-size: 13px;
-        color: #a5b4fc;
+        color: #737373;
+        font-weight: 400;
       }
 
       .input-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
       }
 
       .input-header label {
         font-size: 13px;
         font-weight: 600;
-        color: #c7d2fe;
+        color: #a3a3a3;
       }
 
       .btn-paste {
         border: none;
-        padding: 7px 18px;
-        border-radius: 999px;
-        font-size: 13px;
+        padding: 7px 16px;
+        border-radius: 8px;
+        font-size: 12px;
         font-weight: 600;
         color: #fff;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: #14b8a6;
         cursor: pointer;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+        transition:
+          background 0.15s ease,
+          transform 0.1s ease;
       }
 
       .btn-paste:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.45);
+        background: #0d9488;
       }
 
       .btn-paste:active {
-        transform: translateY(0);
+        transform: scale(0.97);
       }
 
-      textarea {
-        width: 100%;
-        min-height: 90px;
-        padding: 12px 14px;
-        border: 1.5px solid rgba(255, 255, 255, 0.15);
-        border-radius: 12px;
-        font-size: 15px;
-        font-family: inherit;
-        color: #e2e8f0;
-        background: rgba(255, 255, 255, 0.06);
-        resize: vertical;
-        outline: none;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      .btn-hitung {
+        border: none;
+        padding: 7px 16px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
+        background: #f59e0b;
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          transform 0.1s ease;
       }
 
-      textarea::placeholder {
-        color: #64748b;
+      .btn-hitung:hover {
+        background: #d97706;
       }
 
-      textarea:focus {
-        border-color: #818cf8;
-        box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.25);
+      .btn-hitung:active {
+        transform: scale(0.97);
       }
 
-      .result-section {
+      .count-section {
         margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .result-card {
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid #262626;
         border-radius: 12px;
-        padding: 14px;
-        background: rgba(255, 255, 255, 0.05);
-        transition: border-color 0.2s ease, background 0.2s ease;
+        padding: 18px;
+        background: #1a1a1a;
       }
 
-      .result-card:hover {
-        border-color: rgba(129, 140, 248, 0.5);
-        background: rgba(255, 255, 255, 0.08);
+      .count-section.empty-state {
+        display: none;
       }
 
-      .result-head {
+      .count-total {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+
+      .count-total-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #737373;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+
+      .count-total-value {
+        font-size: 28px;
+        font-weight: 800;
+        font-family: "SF Mono", "Cascadia Code", "Consolas", monospace;
+        color: #f59e0b;
+        letter-spacing: -0.5px;
+      }
+
+      .count-total-sub {
+        font-size: 11px;
+        color: #525252;
+        margin-bottom: 14px;
+      }
+
+      .count-list-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 8px;
       }
 
+      .count-list-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #737373;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+
+      .btn-reset {
+        border: 1px solid #333;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #a3a3a3;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .btn-reset:hover {
+        border-color: #ef4444;
+        color: #ef4444;
+      }
+
+      .count-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        max-height: 160px;
+        overflow-y: auto;
+      }
+
+      .count-list::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .count-list::-webkit-scrollbar-thumb {
+        background: #404040;
+        border-radius: 4px;
+      }
+
+      .count-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: #262626;
+        transition: background 0.15s ease;
+      }
+
+      .count-item:hover {
+        background: #333;
+      }
+
+      .count-item-value {
+        font-size: 13px;
+        font-weight: 600;
+        font-family: "SF Mono", "Cascadia Code", "Consolas", monospace;
+        color: #e5e5e5;
+      }
+
+      .count-item-index {
+        font-size: 10px;
+        color: #525252;
+        margin-right: 8px;
+        font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      }
+
+      .btn-remove {
+        border: none;
+        background: transparent;
+        color: #737373;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 2px 4px;
+        border-radius: 4px;
+        transition: all 0.15s ease;
+      }
+
+      .btn-remove:hover {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 58px;
+        padding: 14px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: "SF Mono", "Cascadia Code", "Consolas", monospace;
+        color: #e5e5e5;
+        background: #1a1a1a;
+        resize: vertical;
+        outline: none;
+        transition: border-color 0.2s ease;
+      }
+
+      textarea::placeholder {
+        color: #525252;
+        font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      }
+
+      textarea:focus {
+        border-color: #14b8a6;
+      }
+
+      .result-section {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .result-card {
+        border: 1px solid #262626;
+        border-radius: 10px;
+        padding: 14px 16px;
+        background: #1a1a1a;
+        transition: border-color 0.2s ease;
+      }
+
+      .result-card:hover {
+        border-color: #404040;
+      }
+
+      .result-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
       .result-label {
         display: flex;
         align-items: center;
-        gap: 6px;
-        font-size: 12px;
+        gap: 8px;
+        font-size: 11px;
         font-weight: 600;
-        color: #94a3b8;
+        color: #737373;
         text-transform: uppercase;
-        letter-spacing: 0.4px;
+        letter-spacing: 0.6px;
       }
 
       .dot {
-        width: 8px;
-        height: 8px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
-        background: #667eea;
+        background: #14b8a6;
       }
 
       .dot.bulat {
         background: #f59e0b;
       }
 
+      .dot.tanpa-pemisah {
+        background: #a78bfa;
+      }
+
       .btn-copy {
-        border: 1px solid rgba(129, 140, 248, 0.4);
-        padding: 6px 14px;
-        border-radius: 8px;
-        font-size: 12px;
+        border: 1px solid #333;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 11px;
         font-weight: 600;
-        color: #c7d2fe;
-        background: rgba(129, 140, 248, 0.12);
+        color: #a3a3a3;
+        background: transparent;
         cursor: pointer;
-        transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+        transition: all 0.15s ease;
       }
 
       .btn-copy:hover {
-        background: #818cf8;
-        border-color: #818cf8;
-        color: #fff;
+        border-color: #14b8a6;
+        color: #14b8a6;
       }
 
       .btn-copy.copied {
-        background: #22c55e;
+        background: #14b8a6;
+        border-color: #14b8a6;
         color: #fff;
       }
 
       .result-value {
         font-size: 22px;
         font-weight: 700;
-        font-family: Consolas, Menlo, monospace;
-        color: #f8fafc;
+        font-family: "SF Mono", "Cascadia Code", "Consolas", monospace;
+        color: #f5f5f5;
         word-break: break-all;
         min-height: 30px;
+        letter-spacing: -0.3px;
       }
 
       .result-value.empty {
-        color: #475569;
+        color: #404040;
       }
 
       .hint {
-        margin-top: 16px;
+        margin-top: 20px;
         text-align: center;
         font-size: 12px;
-        color: #64748b;
+        color: #525252;
       }
 
       .toast {
         position: fixed;
         bottom: 24px;
         left: 50%;
-        transform: translateX(-50%) translateY(20px);
-        background: rgba(15, 23, 42, 0.85);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        color: #fff;
+        transform: translateX(-50%) translateY(16px);
+        background: #262626;
+        border: 1px solid #404040;
+        color: #e5e5e5;
         padding: 10px 20px;
-        border-radius: 999px;
+        border-radius: 10px;
         font-size: 13px;
         font-weight: 500;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.25s ease, transform 0.25s ease;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
         z-index: 10;
       }
 
@@ -290,7 +394,6 @@
   </head>
   <body>
     <div class="card">
-      <div class="bg-orb"></div>
       <div class="card-header">
         <h1>Konverter Angka</h1>
         <p>Tempel angka format apapun, hasil langsung diperbarui</p>
@@ -299,13 +402,25 @@
       <div class="input-section">
         <div class="input-header">
           <label for="inputAngka">Input Angka</label>
-          <button class="btn-paste" id="btnPaste" type="button">Paste</button>
+          <div style="display:flex;gap:6px;">
+            <button class="btn-paste" id="btnPaste" type="button">Paste</button>
+            <button class="btn-hitung" id="btnHitung" type="button">Hitung</button>
+          </div>
         </div>
-        <textarea
-          id="inputAngka"
-          placeholder="Paste angka di sini, contoh: 5.000,55"
-          rows="4"
-        ></textarea>
+        <textarea id="inputAngka" placeholder="Paste angka di sini, contoh: 5.000,55" rows="1"></textarea>
+      </div>
+
+      <div class="count-section empty-state" id="countSection">
+        <div class="count-total">
+          <span class="count-total-label">Total</span>
+          <span class="count-total-value" id="totalValue">0</span>
+        </div>
+        <div class="count-total-sub">2 angka di belakang koma</div>
+        <div class="count-list-header">
+          <span class="count-list-label">Daftar Angka</span>
+          <button class="btn-reset" id="btnReset" type="button">Reset Semua</button>
+        </div>
+        <div class="count-list" id="countList"></div>
       </div>
 
       <div class="result-section">
@@ -324,9 +439,17 @@
           </div>
           <div class="result-value empty" id="hasilBulat">-</div>
         </div>
+
+        <div class="result-card">
+          <div class="result-head">
+            <span class="result-label"><span class="dot tanpa-pemisah"></span>Tanpa Pemisah</span>
+            <button class="btn-copy" id="btnCopyTanpa" type="button">Salin</button>
+          </div>
+          <div class="result-value empty" id="hasilTanpa">-</div>
+        </div>
       </div>
 
-      <p class="hint">Hasil otomatis berubah setiap kamu mengetik atau menempel angka</p>
+      <p class="hint">Tempel angka, lalu klik Hitung untuk menjumlahkan. Hasil converter otomatis berubah saat mengetik.</p>
     </div>
 
     <div id="toast" class="toast"></div>
@@ -335,6 +458,12 @@
       const input = document.getElementById("inputAngka");
       const hasilDesimal = document.getElementById("hasilDesimal");
       const hasilBulat = document.getElementById("hasilBulat");
+      const hasilTanpa = document.getElementById("hasilTanpa");
+      const countSection = document.getElementById("countSection");
+      const totalValue = document.getElementById("totalValue");
+      const countList = document.getElementById("countList");
+
+      const countedValues = [];
 
       function parseNumber(raw) {
         if (!raw) return { num: NaN, sep: "." };
@@ -366,16 +495,23 @@
           hasilBulat.textContent = "-";
           hasilDesimal.classList.add("empty");
           hasilBulat.classList.add("empty");
-          return;
+        } else {
+          let duaDesimal = num.toFixed(2);
+
+          hasilDesimal.textContent = duaDesimal;
+          hasilBulat.textContent = Math.round(num).toString();
+          hasilDesimal.classList.remove("empty");
+          hasilBulat.classList.remove("empty");
         }
 
-        let duaDesimal = num.toFixed(2);
-        if (sep === ",") duaDesimal = duaDesimal.replace(".", ",");
-
-        hasilDesimal.textContent = duaDesimal;
-        hasilBulat.textContent = Math.round(num).toString();
-        hasilDesimal.classList.remove("empty");
-        hasilBulat.classList.remove("empty");
+        const raw = input.value.replace(/\./g, "").replace(/,/g, "").trim();
+        if (raw) {
+          hasilTanpa.textContent = raw;
+          hasilTanpa.classList.remove("empty");
+        } else {
+          hasilTanpa.textContent = "-";
+          hasilTanpa.classList.add("empty");
+        }
       }
 
       input.addEventListener("input", update);
@@ -420,6 +556,7 @@
 
       bindCopy("btnCopyDesimal", hasilDesimal);
       bindCopy("btnCopyBulat", hasilBulat);
+      bindCopy("btnCopyTanpa", hasilTanpa);
 
       function showToast(message) {
         const toast = document.getElementById("toast");
@@ -431,6 +568,83 @@
           toast.classList.remove("show");
         }, 2000);
       }
+
+      function formatNumber(num) {
+        return num.toLocaleString("id-ID", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+
+      function updateTotal() {
+        let total = 0;
+        countedValues.forEach((item) => {
+          total += item.num;
+        });
+        totalValue.textContent = formatNumber(total);
+      }
+
+      function renderList() {
+        countList.innerHTML = "";
+        countedValues.forEach((item, index) => {
+          const row = document.createElement("div");
+          row.className = "count-item";
+          row.innerHTML =
+            '<div style="display:flex;align-items:center;">' +
+            '<span class="count-item-index">#' + (index + 1) + "</span>" +
+            '<span class="count-item-value">' + item.display + "</span>" +
+            "</div>" +
+            '<button class="btn-remove" data-index="' + index + '" type="button" title="Hapus">&#10005;</button>';
+          countList.appendChild(row);
+        });
+
+        countList.querySelectorAll(".btn-remove").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const idx = parseInt(this.getAttribute("data-index"));
+            countedValues.splice(idx, 1);
+            updateTotal();
+            renderList();
+            updateCountSection();
+          });
+        });
+      }
+
+      function updateCountSection() {
+        if (countedValues.length === 0) {
+          countSection.classList.add("empty-state");
+        } else {
+          countSection.classList.remove("empty-state");
+        }
+      }
+
+      function addToCount() {
+        const raw = input.value.trim();
+        if (!raw) {
+          showToast("Tidak ada angka untuk dihitung");
+          return;
+        }
+        const { num } = parseNumber(raw);
+        if (isNaN(num)) {
+          showToast("Input bukan angka yang valid");
+          return;
+        }
+        countedValues.push({ num: num, display: raw });
+        updateTotal();
+        renderList();
+        updateCountSection();
+        showToast("Angka ditambahkan ke hitungan!");
+      }
+
+      function resetAll() {
+        countedValues.length = 0;
+        updateTotal();
+        renderList();
+        updateCountSection();
+        showToast("Semua hitungan di-reset");
+      }
+
+      document.getElementById("btnHitung").addEventListener("click", addToCount);
+      document.getElementById("btnReset").addEventListener("click", resetAll);
     </script>
   </body>
 </html>
