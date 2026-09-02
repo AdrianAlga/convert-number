@@ -124,6 +124,41 @@
         display: none;
       }
 
+      .count-placeholder {
+        border: 2px dashed #333;
+        border-radius: 12px;
+        padding: 32px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        min-height: 200px;
+      }
+
+      .count-placeholder.hidden {
+        display: none;
+      }
+
+      .placeholder-icon {
+        font-size: 40px;
+        color: #404040;
+        line-height: 1;
+      }
+
+      .placeholder-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #737373;
+      }
+
+      .placeholder-desc {
+        font-size: 12px;
+        color: #525252;
+        line-height: 1.5;
+      }
+
       .count-total {
         display: flex;
         align-items: baseline;
@@ -390,6 +425,60 @@
         opacity: 1;
         transform: translateX(-50%) translateY(0);
       }
+
+      .left-col {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .right-col {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (min-width: 768px) {
+        .card {
+          max-width: 900px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto 1fr;
+          gap: 28px;
+        }
+
+        .card-header {
+          grid-column: 1 / -1;
+          margin-bottom: 0;
+        }
+
+        .left-col {
+          gap: 24px;
+        }
+
+        .right-col {
+          display: flex;
+        }
+
+        .count-section {
+          margin-top: 0;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .count-list {
+          flex: 1;
+          max-height: 340px;
+        }
+
+        .result-section {
+          margin-top: 0;
+        }
+
+        .hint {
+          margin-top: 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -399,57 +488,66 @@
         <p>Tempel angka format apapun, hasil langsung diperbarui</p>
       </div>
 
-      <div class="input-section">
-        <div class="input-header">
-          <label for="inputAngka">Input Angka</label>
-          <div style="display:flex;gap:6px;">
-            <button class="btn-paste" id="btnPaste" type="button">Paste</button>
-            <button class="btn-hitung" id="btnHitung" type="button">Hitung</button>
+      <div class="left-col">
+        <div class="input-section">
+          <div class="input-header">
+            <label for="inputAngka">Input Angka</label>
+            <div style="display:flex;gap:6px;">
+              <button class="btn-paste" id="btnPaste" type="button">Paste</button>
+              <button class="btn-hitung" id="btnHitung" type="button">Hitung</button>
+            </div>
+          </div>
+          <textarea id="inputAngka" placeholder="Paste angka di sini, contoh: 5.000,55" rows="1"></textarea>
+        </div>
+
+        <div class="result-section">
+          <div class="result-card">
+            <div class="result-head">
+              <span class="result-label"><span class="dot"></span>2 Angka di Belakang Koma</span>
+              <button class="btn-copy" id="btnCopyDesimal" type="button">Salin</button>
+            </div>
+            <div class="result-value empty" id="hasilDesimal">-</div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-head">
+              <span class="result-label"><span class="dot bulat"></span>Dibulatkan</span>
+              <button class="btn-copy" id="btnCopyBulat" type="button">Salin</button>
+            </div>
+            <div class="result-value empty" id="hasilBulat">-</div>
+          </div>
+
+          <div class="result-card">
+            <div class="result-head">
+              <span class="result-label"><span class="dot tanpa-pemisah"></span>Tanpa Pemisah</span>
+              <button class="btn-copy" id="btnCopyTanpa" type="button">Salin</button>
+            </div>
+            <div class="result-value empty" id="hasilTanpa">-</div>
           </div>
         </div>
-        <textarea id="inputAngka" placeholder="Paste angka di sini, contoh: 5.000,55" rows="1"></textarea>
+
+        <p class="hint">Tempel angka, lalu klik Hitung untuk menjumlahkan. Hasil converter otomatis berubah saat mengetik.</p>
       </div>
 
-      <div class="count-section empty-state" id="countSection">
-        <div class="count-total">
-          <span class="count-total-label">Total</span>
-          <span class="count-total-value" id="totalValue">0</span>
+      <div class="right-col">
+        <div class="count-placeholder" id="countPlaceholder">
+          <div class="placeholder-icon">&#8853;</div>
+          <div class="placeholder-title">Belum Ada Angka</div>
+          <div class="placeholder-desc">Paste angka lalu klik Hitung<br>untuk menjumlahkan</div>
         </div>
-        <div class="count-total-sub">2 angka di belakang koma</div>
-        <div class="count-list-header">
-          <span class="count-list-label">Daftar Angka</span>
-          <button class="btn-reset" id="btnReset" type="button">Reset Semua</button>
-        </div>
-        <div class="count-list" id="countList"></div>
-      </div>
-
-      <div class="result-section">
-        <div class="result-card">
-          <div class="result-head">
-            <span class="result-label"><span class="dot"></span>2 Angka di Belakang Koma</span>
-            <button class="btn-copy" id="btnCopyDesimal" type="button">Salin</button>
+        <div class="count-section empty-state" id="countSection">
+          <div class="count-total">
+            <span class="count-total-label">Total</span>
+            <span class="count-total-value" id="totalValue">0</span>
           </div>
-          <div class="result-value empty" id="hasilDesimal">-</div>
-        </div>
-
-        <div class="result-card">
-          <div class="result-head">
-            <span class="result-label"><span class="dot bulat"></span>Dibulatkan</span>
-            <button class="btn-copy" id="btnCopyBulat" type="button">Salin</button>
+          <div class="count-total-sub">2 angka di belakang koma</div>
+          <div class="count-list-header">
+            <span class="count-list-label">Daftar Angka</span>
+            <button class="btn-reset" id="btnReset" type="button">Reset Semua</button>
           </div>
-          <div class="result-value empty" id="hasilBulat">-</div>
-        </div>
-
-        <div class="result-card">
-          <div class="result-head">
-            <span class="result-label"><span class="dot tanpa-pemisah"></span>Tanpa Pemisah</span>
-            <button class="btn-copy" id="btnCopyTanpa" type="button">Salin</button>
-          </div>
-          <div class="result-value empty" id="hasilTanpa">-</div>
+          <div class="count-list" id="countList"></div>
         </div>
       </div>
-
-      <p class="hint">Tempel angka, lalu klik Hitung untuk menjumlahkan. Hasil converter otomatis berubah saat mengetik.</p>
     </div>
 
     <div id="toast" class="toast"></div>
@@ -464,6 +562,7 @@
       const countList = document.getElementById("countList");
 
       const countedValues = [];
+      const countPlaceholder = document.getElementById("countPlaceholder");
 
       function parseNumber(raw) {
         if (!raw) return { num: NaN, sep: "." };
@@ -612,8 +711,10 @@
       function updateCountSection() {
         if (countedValues.length === 0) {
           countSection.classList.add("empty-state");
+          countPlaceholder.classList.remove("hidden");
         } else {
           countSection.classList.remove("empty-state");
+          countPlaceholder.classList.add("hidden");
         }
       }
 
